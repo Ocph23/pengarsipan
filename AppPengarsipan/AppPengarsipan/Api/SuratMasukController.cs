@@ -16,23 +16,29 @@ namespace AppPengarsipan.Api
         {
             using (var db = new OcphDbContext())
             {
-                var result = from a in db.SuratMasuk.Select()
-                             join c in db.Petugas.Select() on a.PetugasId equals c.PetugasId
-                           
-                             select new suratmasuk
-                             {
-                                 Asal = a.Asal,
-                                 File = a.File,
-                                 KodeSurat = a.KodeSurat,
-                                 Lampiran = a.Lampiran,
-                                 NomorSurat = a.NomorSurat,
-                                 Perihal = a.Perihal,
-                                 PetugasId = a.PetugasId,
-                                 SuratMasukId = a.SuratMasukId,
-                                 TanggalMasuk = a.TanggalMasuk,
-                                 TanggalSurat = a.TanggalSurat,
-                                 Petugas=c
-                             };
+                var result = (from a in db.SuratMasuk.Select()
+                              join c in db.Petugas.Select() on a.PetugasId equals c.PetugasId
+                              select new suratmasuk
+                              {
+                                  Asal = a.Asal,
+                                  File = a.File,
+                                  KodeSurat = a.KodeSurat,
+                                  Lampiran = a.Lampiran,
+                                  NomorSurat = a.NomorSurat,
+                                  Perihal = a.Perihal,
+                                  PetugasId = a.PetugasId,
+                                  SuratMasukId = a.SuratMasukId,
+                                  TanggalMasuk = a.TanggalMasuk,
+                                  TanggalSurat = a.TanggalSurat,
+                                  Petugas = c
+                              }).ToList();
+                foreach(var item in result)
+                {
+                    item.Disposisi = (from a in  db.Disposisi.Where(O => O.SuratMasukId == item.SuratMasukId)
+                                     join b in db.Petugas.Select() on a.PetugasId equals b.PetugasId
+                                     select new disposisi { Dari=a.Dari, Isi=a.Isi, Id=a.Id, Kode=a.Kode, Perihal=a.Perihal, Petugas=b, PetugasId=a.PetugasId, SuratMasukId=a.SuratMasukId,
+                                      TanggalBuat=a.TanggalBuat, TglPenyelesaian=a.TglPenyelesaian, Tujuan=a.Tujuan}).FirstOrDefault();
+                }
 
                 return result.ToList();
             }

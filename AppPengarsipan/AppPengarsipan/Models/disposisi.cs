@@ -84,7 +84,10 @@ using DAL;
           [DbColumn("TanggalBuat")] 
           public DateTime TanggalBuat 
           { 
-               get{return _tanggalbuat;} 
+               get{
+                if (_tanggalbuat == new DateTime())
+                    _tanggalbuat = DateTime.Now;
+                    return _tanggalbuat;} 
                set{ 
                       _tanggalbuat=value; 
                      OnPropertyChange("TanggalBuat");

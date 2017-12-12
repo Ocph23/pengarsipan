@@ -1,4 +1,5 @@
 ﻿using AppPengarsipan.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +73,8 @@ namespace AppPengarsipan.Api
                 {
                     if (ModelState.IsValid)
                     {
+                        var uId = User.Identity.GetUserId();
+                        value.PetugasId = db.Petugas.Where(O => O.UserId == uId).FirstOrDefault().PetugasId;
                         value.Id= db.Disposisi.InsertAndGetLastID(value);
                         if (value.SuratMasukId > 0)
                             return Request.CreateResponse(HttpStatusCode.OK, value);
@@ -110,8 +113,9 @@ namespace AppPengarsipan.Api
                 {
                     if (ModelState.IsValid)
                     {
-                        value.SuratMasukId = db.Disposisi.InsertAndGetLastID(value);
-                        if (value.SuratMasukId > 0)
+                        var isUpdated = db.Disposisi.Update(O => new { O.Kode, O.Dari, O.Isi, O.Perihal, O.PetugasId, O.TglPenyelesaian, O.Tujuan }, 
+                            value,O => O.Id == value.Id);
+                        if (isUpdated)
                             return Request.CreateResponse(HttpStatusCode.OK, value);
                         else
                             throw new SystemException("Data Tidak Tersimpan");

@@ -1,4 +1,5 @@
 ﻿using AppPengarsipan.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,6 +70,8 @@ namespace AppPengarsipan.Api
                 {
                     if (ModelState.IsValid)
                     {
+                        var uId = User.Identity.GetUserId();
+                        value.PetugasId = db.Petugas.Where(O => O.UserId == uId).FirstOrDefault().PetugasId;
                         value.SuratMasukId = db.SuratKeluar.InsertAndGetLastID(value);
                         if (value.SuratMasukId > 0)
                             return Request.CreateResponse(HttpStatusCode.OK, value);

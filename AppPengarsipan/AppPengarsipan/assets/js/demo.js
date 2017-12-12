@@ -248,16 +248,16 @@ demo = {
         marker.setMap(map);
     },
 
-    showNotification: function(from, align) {
-        color = Math.floor((Math.random() * 4) + 1);
+    showNotification: function(from, align,pesan) {
+        color = Math.floor((1 * 4) + 1);
 
         $.notify({
             icon: "notifications",
-            message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
+            message: pesan
 
         }, {
             type: type[color],
-            timer: 4000,
+            timer: 1500,
             placement: {
                 from: from,
                 align: align

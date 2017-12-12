@@ -1,14 +1,10 @@
 ﻿<div class="col-md-12" ng-init="Init()">
    
     <div class="card">
-       
         <div class="card-header" data-background-color="green">
             <div class="pull-right">
                 <a href="#!AddSuratMasuk" class="btn btn-rose btn-round btn-just-icon"  >
                     <i class="material-icons">add</i>
-                    <div class="ripple-container">
-                        
-                    </div>
                 </a>
             </div>
             <h4 class="title">Surat Masuk</h4>
@@ -27,6 +23,7 @@
                 <th>Perihal</th>
                 <th>Lampiran</th>
                 <th>Tanggal Diterima</th>
+                <th>Action</th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in SuratMasuk">
@@ -36,8 +33,41 @@
                         <td>{{item.NomorSurat}}</td>
                         <td>{{item.TanggalSurat}}</td>
                         <td>{{item.Perihal}}</td>
-                        <td>{{item.Lampiran}}Exemplar</td>
+                        <td>{{item.Lampiran}} Exemplar</td>
                         <td>{{item.TanggalMasuk}}</td>
+                        <td>
+                            <div class="collapse navbar-collapse">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="!#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="material-icons">list</i>
+                                            <span class="notification"></span>
+                                            <p class="hidden-lg hidden-md">Notifications</p>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="#">Edit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Hapus</a>
+                                            </li>
+                                            <li >
+                                                <a ng-if="item.Disposisi==null" data-toggle="modal" ng-click="SetSelectedItem(item)" data-target="#modal2">Tambah Disposi</a>
+                                                <a ng-if="item.Disposisi!=null" data-toggle="modal" ng-click="SetSelectedItem(item)" data-target="#modal2">Lihat Disposisi</a>
+
+                                            </li>
+
+                                            <li>
+                                                  <a ng-if="item.File==null" data-toggle="modal" ng-click="SetSelectedItem(item)" data-target="#addFile">Tambah File</a>
+                                                 <a ng-if="item.File!=null" href="#!ViewFile/{{item.File}}">Lihat File</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </td>
                     </tr>
                 
                 </tbody>
@@ -45,25 +75,125 @@
         </div>
     </div>
 
-
-</div>
-
-
-
-<div id="modal2" class="modal modal--align-top modal__bg" role="dialog" aria-hidden="true">
-    <div class="modal__dialog">
-        <div class="modal__content">
-            <h1>Big Modal</h1>
-            <h3>This modal is pretty tall.</h3>
-            <p>Selfies normcore four dollar toast four loko listicle artisan. Hoodie Marfa authentic, wayfarers church-key tofu Banksy pop-up Kickstarter Brooklyn heirloom swag synth. Echo Park cray synth mixtape. Tofu gastropub squid readymade, trust fund Wes Anderson DIY PBR 8-bit try-hard +1 Shoreditch lo-fi tote bag.</p>
-            <p><img src="http://unsplash.it/600/300" alt="" /></p>
-            <p>Mumblecore cred selfies fingerstache. Tousled skateboard plaid lo-fi shabby chic salvia, swag Odd Future Etsy art party Austin cronut. Crucifix whatever Pinterest food truck, pickled viral cray 90's DIY chambray keffiyeh biodiesel Vice blog. Cred meh yr tofu.</p>
-            <p>Mumblecore cred selfies fingerstache. Tousled skateboard plaid lo-fi shabby chic salvia, swag Odd Future Etsy art party Austin cronut. Crucifix whatever Pinterest food truck, pickled viral cray 90's DIY chambray keffiyeh biodiesel Vice blog. Cred meh yr tofu.</p>
-            <!-- modal close button -->
-            <a href="" class="modal__close demo-close">
-                <svg class="" viewBox="0 0 24 24"><path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z" /><path d="M0 0h24v24h-24z" fill="none" /></svg>
-            </a>
+    <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header" data-background-color="green">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="title">Tambah/Edit Disposisi</h4>
+                            <p class="category">Lengkapi Data Disposisi</p>
+                        </div>
+                        <div class="card-content">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="control-label">Kode Disposisi</label>
+                                        <div class="form-group label-floating">
+                                            <input type="text" class="form-control" ng-model="model.Kode">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label">Nomor Surat</label>
+                                        <div class="form-group label-floating">
+                                           
+                                            <input disabled type="text" class="form-control" ng-model="SelectedItem.NomorSurat">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Dari</label>
+                                            <div class="form-group label-floating">
+                                                <textarea class="form-control" rows="2" ng-model="model.Dari"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Tujuan</label>
+                                            <div class="form-group label-floating">
+                                                <textarea class="form-control" rows="2" ng-model="model.Tujuan"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="control-label">Perihal</label>
+                                        <div class="form-group label-floating">
+                                            <input type="text" class="form-control" ng-model="model.Perihal">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label">Tanggal Diselesaikan</label>
+                                        <div class="form-group label-floating">
+                                            <input type="date" class="form-control" ng-model="model.TglPenyelesaian">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Isi</label>
+                                            <div class="form-group label-floating">
+                                                <textarea class="form-control" rows="4" ng-model="model.Isi"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary pull-right" ng-click="AddNewDisposisi(model)">Simpan</button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="modal fade" id="addFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header" data-background-color="green">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="title">Tambah Disposisi</h4>
+                            <p class="category">Lengkapi Data Disposisi</p>
+                        </div>
+                        <div class="card-content">
+                            <form>
+                               
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>File</label>
+                                            <div class="form-group label-floating">
+                                                <input type="text" id="fake-file-button-browse" class="form-control" />
+                                                <input type="file" id="file"  rows="4" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary pull-right" ng-click="AddNewFile()">Simpan</button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+   
 </div>
+
+
 

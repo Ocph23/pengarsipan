@@ -1,0 +1,74 @@
+﻿<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header" data-background-color="orange">
+                <h4 class="title">Tambah Surat Keluar</h4>
+                <p class="category">Lengkapi Data Surat Keluar</p>
+            </div>
+            <div class="card-content">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Kode Surat</label>
+                                <input type="text" class="form-control" ng-model="model.KodeSurat">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Tujuan Surat</label>
+                                <div class="form-group label-floating">
+                                    <textarea class="form-control" rows="5" ng-model="model.Tujuan"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Nomor Surat</label>
+                                <input type="text" class="form-control" ng-model="model.NomorSurat">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Tanggal Surat</label>
+                                <input type="datetime-local" class="form-control" ng-model="model.TanggalSurat">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Perihal</label>
+                                <input type="text" class="form-control" ng-model="model.Perihal">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Lampiran</label>
+                                <input type="text" class="form-control" ng-model="model.Lampiran">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">File</label>
+                                <input type="file" class="form-control" file name="file">
+                            </div>
+                        </div>
+                    </div>
+                
+                    <button type="submit" class="btn btn-primary pull-right" ng-click="AddNewItem(model)">Simpan</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+</div>

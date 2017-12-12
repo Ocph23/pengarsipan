@@ -29,30 +29,29 @@
                 </a>
             </div>
             <div class="sidebar-wrapper">
-                <ul class="nav">
+                <ul class="nav nav-pills nav-pills-rose nav-stacked">
                     <li class="active">
                         <a href="#!">
                             <i class="material-icons add circle outline"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="active" >
                         <a href="#!suratmasuk">
                             <i class="material-icons"></i>
                             <p>Surat Masuk</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="#!suratkeluar">
                             <i class="material-icons"></i>
                             <p>Surat Keluar</p>
                         </a>
                     </li>
-                
                     <li class="active-pro">
                         <a href="upgrade.html">
-                            <i class="material-icons">unarchive</i>
-                            <p>Upgrade to PRO</p>
+                            <i class="material-icons"></i>
+                            <p>By</p>
                         </a>
                     </li>
                 </ul>
@@ -61,15 +60,7 @@
         <div class="main-panel">
             <nav class="navbar navbar-transparent navbar-absolute">
                 <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#"> Material Dashboard </a>
-                    </div>
+                  
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
@@ -115,7 +106,7 @@
                                 <span class="material-input"></span>
                             </div>
                             <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                <i class="material-icons">add</i>
+                                <i class="material-icons">search</i>
                                 <div class="ripple-container"></div>
                             </button>
                         </form>
@@ -130,28 +121,7 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Company
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
+
                     </nav>
                     <p class="copyright pull-right">
                         &copy;
@@ -163,7 +133,9 @@
                 </div>
             </footer>
         </div>
+
     </div>
+   
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -171,13 +143,13 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
     <!-- Material Dashboard javascript methods -->
     <script src="../assets/js/material-dashboard.js?v=1.2.0"></script>
+   
     <script type="text/javascript">
+
     $(document).ready(function() {
 
         // Javascript method's body can be found in assets/js/demos.js
         demo.initDashboardPageCharts();
-
-
 
     });
     </script>
