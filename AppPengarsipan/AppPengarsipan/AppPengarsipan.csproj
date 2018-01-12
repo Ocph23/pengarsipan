@@ -207,10 +207,12 @@
   <ItemGroup>
     <Compile Include="Api\DisposisiController.cs" />
     <Compile Include="Api\FileController.cs" />
+    <Compile Include="Api\SummaryController.cs" />
     <Compile Include="Api\SuratKeluarController.cs" />
     <Compile Include="Api\SuratMasukController.cs" />
     <Compile Include="Models\disposisi.cs" />
     <Compile Include="Models\petugas.cs" />
+    <Compile Include="Models\Summary.cs" />
     <Compile Include="Models\suratkeluar.cs" />
     <Compile Include="Models\suratmasuk.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -242,6 +244,7 @@
     <Content Include="assets\img\favicon.png" />
     <Content Include="assets\img\mask.png" />
     <Content Include="assets\img\new_logo.png" />
+    <Content Include="assets\img\pemerintah provinsi file png.png" />
     <Content Include="assets\img\sidebar-1.jpg" />
     <Content Include="assets\img\sidebar-2.jpg" />
     <Content Include="assets\img\sidebar-3.jpg" />
@@ -753,6 +756,7 @@
     <Content Include="Scripts\pdf\web\locale\zh-TW\viewer.properties" />
     <Content Include="Scripts\pdf\web\locale\zu\viewer.properties" />
     <Content Include="Scripts\pdf\web\viewer.js.map" />
+    <Content Include="Views\Shared\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

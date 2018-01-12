@@ -3,6 +3,7 @@
         $routeProvider
             .when("/", {
                 templateUrl: "../ClientViews/main.html",
+                controller:"MainController"
             })
             .when("/suratmasuk", {
                 templateUrl: "../ClientViews/suratmasuk.html",
@@ -244,6 +245,23 @@
         return service;
 
     })
+    .controller("MainController", function ($scope,$http) {
+        $scope.Summary = {};
+        $scope.Init = function ()
+        {
+            $http({
+                method: 'get',
+                url: "/api/summary/1",
+            }).then(function (response) {
+                $scope.Summary = response.data;
+            }, function (error) {
+                alert(error.data);
+                
+            });
+
+        }
+    })
+
 
     .controller("SuratMasukController", function ($scope, SuratMasukService,$http,$sce) {
 

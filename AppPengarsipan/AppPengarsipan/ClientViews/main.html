@@ -1,57 +1,50 @@
 ﻿
-<div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-header" data-background-color="green">
-                <i class="material-icons">store</i>
-            </div>
-            <div class="card-content">
-                <p class="category">Surat Masuk</p>
-                <h3 class="title">$34,245</h3>
-            </div>
-            <div class="card-footer">
-                <div class="stats">
-                    <i class="material-icons">date_range</i> Last 24 Hours
+<div class="row" ng-init="Init()">
+    
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green">
+                    <i class="material-icons">store</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Surat Masuk</p>
+                    <h3 class="title">{{Summary.SuratMasuk}}</h3>
+                </div>
+                <div class="card-footer">
+                    
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-header" data-background-color="orange">
-                <i class="material-icons">content_copy</i>
-            </div>
-            <div class="card-content">
-                <p class="category">Surat Keluar</p>
-                <h3 class="title">
-                    49/50
-                    <small>GB</small>
-                </h3>
-            </div>
-            <div class="card-footer">
-                <div class="stats">
-                    <i class="material-icons text-danger">warning</i>
-                    <a href="#pablo">Get More Space...</a>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange">
+                    <i class="material-icons">content_copy</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Surat Keluar</p>
+                    <h3 class="title">
+                      {{Summary.SuratKeluar}}
+                    </h3>
+                </div>
+                <div class="card-footer">
+                   
                 </div>
             </div>
         </div>
-    </div>
-   
-    <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-header" data-background-color="red">
-                <i class="material-icons">info_outline</i>
-            </div>
-            <div class="card-content">
-                <p class="category">Disposisi</p>
-                <h3 class="title">75</h3>
-            </div>
-            <div class="card-footer">
-                <div class="stats">
-                    <i class="material-icons">local_offer</i> Tracked from Github
+
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">info_outline</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Disposisi</p>
+                    <h3 class="title">{{Summary.Disposisi}}</h3>
+                </div>
+                <div class="card-footer">
+                   
                 </div>
             </div>
         </div>
+
     </div>
-   
-</div>
