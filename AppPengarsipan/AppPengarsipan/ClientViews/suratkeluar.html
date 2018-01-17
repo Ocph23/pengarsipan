@@ -11,8 +11,16 @@
                 </a>
             </div>
             <h4 class="title">Surat Keluar</h4>
-
-            <p class="category">Daftar Semua Surat Keluar</p>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group  is-empty">
+                    <input type="text" ng-model="Search" class="form-control" placeholder="Search">
+                    <span class="material-input"></span>
+                </div>
+                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                </button>
+            </form>
         </div>
         <div class="card-content table-responsive">
             <table class="table table-hover">
@@ -28,12 +36,12 @@
                 <th>Action</th>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in SuratKeluar">
+                    <tr ng-repeat="item in SuratKeluar|filter:Search">
                         <td>{{$index+1}}</td>
                         <td>{{item.KodeSurat}}</td>
                         <td>{{item.Tujuan}}</td>
                         <td>{{item.NomorSurat}}</td>
-                        <td>{{item.TanggalSurat}}</td>
+                        <td>{{item.TanggalSurat|date:'dd-MM-yyyy'}}</td>
                         <td>{{item.Perihal}}</td>
                         <td>{{item.Lampiran}} Exemplar</td>
                         <td>{{item.Tanggal}}</td>

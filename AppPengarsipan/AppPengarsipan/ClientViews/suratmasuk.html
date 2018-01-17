@@ -3,13 +3,23 @@
     <div class="card">
         <div class="card-header" data-background-color="green">
             <div class="pull-right">
+                
                 <a href="#!AddSuratMasuk" class="btn btn-rose btn-round btn-just-icon"  >
                     <i class="material-icons">add</i>
                 </a>
+               
             </div>
             <h4 class="title">Surat Masuk</h4>
-           
-            <p class="category">Daftar Semua Surat Masuk</p>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group  is-empty">
+                    <input type="text" ng-model="Search" class="form-control" placeholder="Search">
+                    <span class="material-input"></span>
+                </div>
+                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                </button>
+            </form>
           
         </div>
         <div class="card-content table-responsive">
@@ -26,15 +36,15 @@
                 <th>Action</th>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in SuratMasuk">
+                    <tr ng-repeat="item in SuratMasuk |filter:Search">
                         <td>{{$index+1}}</td>
                         <td>{{item.KodeSurat}}</td>
                         <td>{{item.Asal}}</td>
                         <td>{{item.NomorSurat}}</td>
-                        <td>{{item.TanggalSurat}}</td>
+                        <td>{{item.TanggalSurat|date:'dd-MM-yyyy'}}</td>
                         <td>{{item.Perihal}}</td>
                         <td>{{item.Lampiran}} Exemplar</td>
-                        <td>{{item.TanggalMasuk}}</td>
+                        <td>{{item.TanggalMasuk|date:'dd-MM-yyyy'}}</td>
                         <td>
                             <div class="collapse navbar-collapse">
                                 <ul class="nav navbar-nav navbar-right">

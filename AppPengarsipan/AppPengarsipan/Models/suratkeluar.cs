@@ -10,14 +10,14 @@ using DAL;
      [TableName("suratkeluar")] 
      public class suratkeluar:BaseNotifyProperty  
    {
-          [PrimaryKey("SuratMasukId")] 
-          [DbColumn("SuratMasukId")] 
+          [PrimaryKey("SuratKeluarId")] 
+          [DbColumn("SuratKeluarId")] 
           public int SuratMasukId 
           { 
                get{return _suratmasukid;} 
                set{ 
                       _suratmasukid=value; 
-                     OnPropertyChange("SuratMasukId");
+                     OnPropertyChange("SuratKeluarId");
                      }
           } 
 
