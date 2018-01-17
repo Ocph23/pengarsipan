@@ -74,7 +74,7 @@ using DAL;
           } 
 
           [DbColumn("Lampiran")] 
-          public int Lampiran 
+          public string Lampiran 
           { 
                get{return _lampiran;} 
                set{ 
@@ -109,17 +109,16 @@ using DAL;
             }
         }
 
-        [DbColumn("PetugasId")] 
-          public int PetugasId 
+        [DbColumn("UserId")] 
+          public string UserID 
           { 
                get{return _petugasid;} 
                set{ 
                       _petugasid=value; 
-                     OnPropertyChange("PetugasId");
+                     OnPropertyChange("UserId");
                      }
           }
 
-        public petugas Petugas { get; internal set; }
         public disposisi Disposisi { get; internal set; }
 
         private int  _suratmasukid;
@@ -129,9 +128,9 @@ using DAL;
            private string  _nomorsurat;
            private DateTime  _tanggalsurat;
            private string  _perihal;
-           private int  _lampiran;
+           private string _lampiran;
            private string  _file;
-           private int  _petugasid;
+           private string  _petugasid;
       }
 }
 

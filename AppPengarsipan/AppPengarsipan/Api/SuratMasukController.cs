@@ -17,7 +17,6 @@ namespace AppPengarsipan.Api
             using (var db = new OcphDbContext())
             {
                 var result = (from a in db.SuratMasuk.Select()
-                              join c in db.Petugas.Select() on a.PetugasId equals c.PetugasId
                               select new suratmasuk
                               {
                                   Asal = a.Asal,
@@ -26,17 +25,16 @@ namespace AppPengarsipan.Api
                                   Lampiran = a.Lampiran,
                                   NomorSurat = a.NomorSurat,
                                   Perihal = a.Perihal,
-                                  PetugasId = a.PetugasId,
+                                  UserID = a.UserID,
                                   SuratMasukId = a.SuratMasukId,
                                   TanggalMasuk = a.TanggalMasuk,
                                   TanggalSurat = a.TanggalSurat,
-                                  Petugas = c
                               }).ToList();
+
                 foreach(var item in result)
                 {
                     item.Disposisi = (from a in  db.Disposisi.Where(O => O.SuratMasukId == item.SuratMasukId)
-                                     join b in db.Petugas.Select() on a.PetugasId equals b.PetugasId
-                                     select new disposisi { Dari=a.Dari, Isi=a.Isi, Id=a.Id, Kode=a.Kode, Perihal=a.Perihal, Petugas=b, PetugasId=a.PetugasId, SuratMasukId=a.SuratMasukId,
+                                     select new disposisi { Dari=a.Dari, Isi=a.Isi, Id=a.Id, Kode=a.Kode, Perihal=a.Perihal, UserId=a.UserId, SuratMasukId=a.SuratMasukId,
                                       TanggalBuat=a.TanggalBuat, TglPenyelesaian=a.TglPenyelesaian, Tujuan=a.Tujuan}).FirstOrDefault();
                 }
 
@@ -50,7 +48,6 @@ namespace AppPengarsipan.Api
             using (var db = new OcphDbContext())
             {
                 var result = from a in db.SuratMasuk.Where(O=>O.SuratMasukId==id)
-                             join c in db.Petugas.Select() on a.PetugasId equals c.PetugasId
                              join b in db.Disposisi.Select().DefaultIfEmpty() on a.SuratMasukId equals b.SuratMasukId
                              select new suratmasuk
                              {
@@ -60,12 +57,11 @@ namespace AppPengarsipan.Api
                                  Lampiran = a.Lampiran,
                                  NomorSurat = a.NomorSurat,
                                  Perihal = a.Perihal,
-                                 PetugasId = a.PetugasId,
+                                 UserID = a.UserID,
                                  SuratMasukId = a.SuratMasukId,
                                  TanggalMasuk = a.TanggalMasuk,
                                  TanggalSurat = a.TanggalSurat,
                                  Disposisi = b,
-                                 Petugas = c
                              };
 
                 return result.FirstOrDefault();
@@ -82,7 +78,7 @@ namespace AppPengarsipan.Api
                     if(ModelState.IsValid)
                     {
                        var uId= User.Identity.GetUserId();
-                        value.PetugasId = db.Petugas.Where(O => O.UserId == uId).FirstOrDefault().PetugasId;
+                        value.UserID = uId;
                         value.SuratMasukId = db.SuratMasuk.InsertAndGetLastID(value);
                         if (value.SuratMasukId > 0)
                             return Request.CreateResponse(HttpStatusCode.OK, value);

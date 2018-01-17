@@ -17,12 +17,11 @@ namespace AppPengarsipan.Api
             using (var db = new OcphDbContext())
             {
                 var result = from a in db.Disposisi.Select()
-                             join c in db.Petugas.Select() on a.PetugasId equals c.PetugasId
                              select new disposisi
                              {
                                  Tujuan = a.Tujuan,
                                  Perihal = a.Perihal,
-                                 PetugasId = a.PetugasId,
+                                 UserId = a.UserId,
                                  SuratMasukId = a.SuratMasukId,
                              };
                 return result.ToList();
@@ -37,7 +36,6 @@ namespace AppPengarsipan.Api
                 try
                 {
                     var result = from a in db.Disposisi.Where(O => O.SuratMasukId == id)
-                                 join c in db.Petugas.Select() on a.PetugasId equals c.PetugasId
                                  select new disposisi
                                  {
                                      Dari = a.Dari,
@@ -45,12 +43,11 @@ namespace AppPengarsipan.Api
                                      Isi = a.Isi,
                                      Kode = a.Kode,
                                      Perihal = a.Perihal,
-                                     PetugasId = a.PetugasId,
+                                     UserId = a.UserId,
                                      SuratMasukId = a.SuratMasukId,
                                      TanggalBuat = a.TanggalBuat,
                                      TglPenyelesaian = a.TanggalBuat,
                                      Tujuan = a.Tujuan,
-                                     Petugas = c
                                  };
 
                     return Request.CreateResponse(HttpStatusCode.OK, result.FirstOrDefault());
@@ -74,7 +71,7 @@ namespace AppPengarsipan.Api
                     if (ModelState.IsValid)
                     {
                         var uId = User.Identity.GetUserId();
-                        value.PetugasId = db.Petugas.Where(O => O.UserId == uId).FirstOrDefault().PetugasId;
+                        value.UserId = uId;
                         value.Id= db.Disposisi.InsertAndGetLastID(value);
                         if (value.SuratMasukId > 0)
                             return Request.CreateResponse(HttpStatusCode.OK, value);
@@ -113,7 +110,7 @@ namespace AppPengarsipan.Api
                 {
                     if (ModelState.IsValid)
                     {
-                        var isUpdated = db.Disposisi.Update(O => new { O.Kode, O.Dari, O.Isi, O.Perihal, O.PetugasId, O.TglPenyelesaian, O.Tujuan }, 
+                        var isUpdated = db.Disposisi.Update(O => new { O.Kode, O.Dari, O.Isi, O.Perihal, O.UserId, O.TglPenyelesaian, O.Tujuan }, 
                             value,O => O.Id == value.Id);
                         if (isUpdated)
                             return Request.CreateResponse(HttpStatusCode.OK, value);

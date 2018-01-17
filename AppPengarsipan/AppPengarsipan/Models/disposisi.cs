@@ -94,13 +94,13 @@ using DAL;
                      }
           } 
 
-          [DbColumn("PetugasId")] 
-          public int PetugasId 
+          [DbColumn("UserId")] 
+          public string UserId 
           { 
                get{return _petugasid;} 
                set{ 
                       _petugasid=value; 
-                     OnPropertyChange("PetugasId");
+                     OnPropertyChange("UserId");
                      }
           } 
 
@@ -114,7 +114,6 @@ using DAL;
                      }
           }
 
-        public petugas Petugas { get; internal set; }
 
         private int  _id;
            private string  _kode;
@@ -124,7 +123,7 @@ using DAL;
            private string  _tujuan;
            private string  _isi;
            private DateTime  _tanggalbuat;
-           private int  _petugasid;
+           private string  _petugasid;
            private int  _suratmasukid;
       }
 }

@@ -1,4 +1,4 @@
-﻿using AppPengarsipan.Models;
+﻿    using AppPengarsipan.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,6 @@ namespace AppPengarsipan.Api
             using (var db = new OcphDbContext())
             {
                 var result = from a in db.SuratKeluar.Select()
-                             join c in db.Petugas.Select() on a.PetugasId equals c.PetugasId
                              select new suratkeluar
                              {
                                  Tujuan = a.Tujuan,
@@ -25,11 +24,10 @@ namespace AppPengarsipan.Api
                                  Lampiran = a.Lampiran,
                                  NomorSurat = a.NomorSurat,
                                  Perihal = a.Perihal,
-                                 PetugasId = a.PetugasId,
+                                 UserId = a.UserId,
                                  SuratMasukId = a.SuratMasukId,
                                  TanggalKeluar = a.TanggalKeluar,
-                                 TanggalSurat = a.TanggalSurat,
-                                 Petugas = c
+                                 TanggalSurat = a.TanggalSurat
                              };
                 return result.ToList();
             }
@@ -41,7 +39,6 @@ namespace AppPengarsipan.Api
             using (var db = new OcphDbContext())
             {
                 var result = from a in db.SuratKeluar.Where(O => O.SuratMasukId == id)
-                             join c in db.Petugas.Select() on a.PetugasId equals c.PetugasId
                              select new suratkeluar
                              {
                                  Tujuan = a.Tujuan,
@@ -50,11 +47,10 @@ namespace AppPengarsipan.Api
                                  Lampiran = a.Lampiran,
                                  NomorSurat = a.NomorSurat,
                                  Perihal = a.Perihal,
-                                 PetugasId = a.PetugasId,
+                                 UserId = a.UserId,
                                  SuratMasukId = a.SuratMasukId,
                                  TanggalKeluar = a.TanggalKeluar,
                                  TanggalSurat = a.TanggalSurat,
-                                 Petugas = c
                              };
 
                 return result.FirstOrDefault();
@@ -71,7 +67,7 @@ namespace AppPengarsipan.Api
                     if (ModelState.IsValid)
                     {
                         var uId = User.Identity.GetUserId();
-                        value.PetugasId = db.Petugas.Where(O => O.UserId == uId).FirstOrDefault().PetugasId;
+                        value.UserId = uId;
                         value.SuratMasukId = db.SuratKeluar.InsertAndGetLastID(value);
                         if (value.SuratMasukId > 0)
                             return Request.CreateResponse(HttpStatusCode.OK, value);

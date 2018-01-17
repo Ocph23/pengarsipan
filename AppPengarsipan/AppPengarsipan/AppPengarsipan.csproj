@@ -211,7 +211,6 @@
     <Compile Include="Api\SuratKeluarController.cs" />
     <Compile Include="Api\SuratMasukController.cs" />
     <Compile Include="Models\disposisi.cs" />
-    <Compile Include="Models\petugas.cs" />
     <Compile Include="Models\Summary.cs" />
     <Compile Include="Models\suratkeluar.cs" />
     <Compile Include="Models\suratmasuk.cs" />
@@ -757,6 +756,10 @@
     <Content Include="Scripts\pdf\web\locale\zu\viewer.properties" />
     <Content Include="Scripts\pdf\web\viewer.js.map" />
     <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Shared\_Laporan.cshtml" />
+    <Content Include="Views\Home\LaporanSuratMasuk.cshtml" />
+    <Content Include="Views\Home\LaporanSuratKeluar.cshtml" />
+    <Content Include="Views\Home\LaporanSuratDisposisi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

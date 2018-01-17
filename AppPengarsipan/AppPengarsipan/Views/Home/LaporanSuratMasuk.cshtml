@@ -1,0 +1,77 @@
+﻿@model IEnumerable<AppPengarsipan.Models.suratmasuk>
+
+@{
+    ViewBag.Title = "LaporanSuratMasuk";
+    Layout = "~/Views/Shared/_Laporan.cshtml";
+}
+
+<div class="container-fluid">
+    <table>
+        <tr>
+            <th><img style="margin:20px" width="100" height="100" src="~/assets/img/pemerintah provinsi file png.png" /></th>
+        <th>
+            <h3>SEKRETARIAT DAERAH  PROVINSI  PAPUA</h3>
+            <h4>BIRO PERBATASAN DAN KERJASAMA LUAR NEGERI</h4>
+            <h6>JL. Raya Abepura No. 8  Entrop Jayapura    Telp. (62967) 534843, (62967) 531519</h6>
+        </th>
+        </tr>
+        
+    </table>
+</div>
+<center style="margin:20px"><h2>LAPORAN SURAT MASUK</h2></center>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.KodeSurat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Asal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomorSurat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TanggalSurat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Perihal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lampiran)
+        </th>
+     
+        <th>
+            @Html.DisplayNameFor(model => model.TanggalMasuk)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.KodeSurat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomorSurat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TanggalSurat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Perihal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lampiran)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.TanggalMasuk)
+        </td>
+       
+    </tr>
+}
+
+</table>
