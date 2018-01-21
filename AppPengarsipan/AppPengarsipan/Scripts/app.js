@@ -5,6 +5,7 @@
                 templateUrl: "../ClientViews/main.html",
                 controller:"MainController"
             })
+
             .when("/suratmasuk", {
                 templateUrl: "../ClientViews/suratmasuk.html",
                 controller: "SuratMasukController"
@@ -90,16 +91,14 @@
         service.Update = function (model) {
             $http(
                 {
-                    method: "Post",
-                    ulr: '/api/SuratMasuk/put'
-                }.then(function (response) {
-                    model.KodeSurat = response.KodeSurat;
-                    return true;
+                    method: "PUT",
+                    url: '/api/SuratMasuk/' + model.SuratMasukId,
+                    data: model
+                }).then(function (response) {
+                    alert("Data Tersimpan ...")
                 }, function (response) {
                     alert(response.Message);
-                    return false;
-                }
-                    ));
+                });
         };
 
         service.Delete = function (model) {
@@ -196,7 +195,7 @@
             $http(
                 {
                     method: "Post",
-                    url: '/api/SuratKeluar/post',
+                    url: '/api/SuratKeluar',
                     data: model
                 }).then(function (response) {
                     this.Datas.push(response);
@@ -211,21 +210,19 @@
         service.Update = function (model) {
             $http(
                 {
-                    method: "Post",
-                    url: '/api/SuratKeluar/put',
+                    method: "PUT",
+                    url: '/api/SuratKeluar/' + model.SuratMasukId,
                     data: model
 
-                }.then(function (response) {
-                    model.KodeSurat = response.KodeSurat;
+                }).then(function (response) {
                     return true;
                 }, function (response) {
                     alert(response.Message);
                     return false;
-                }
-                    ));
-        };
+                });
+        }
 
-        service.Update = function (model) {
+        service.Delete = function (model) {
             $http(
                 {
                     method: "Post",
@@ -263,7 +260,7 @@
     })
 
 
-    .controller("SuratMasukController", function ($scope, SuratMasukService,$http,$sce) {
+    .controller("SuratMasukController", function ($scope, SuratMasukService,$http,$sce,$rootScope) {
 
         $scope.SuratMasuk = [];
         $scope.Init = function ()
@@ -281,6 +278,11 @@
             SuratMasukService.Get().then(function (data) {
                 $scope.SuratMasuk = data;
             });
+        }
+
+        $scope.EditSurat = function(item)
+        {
+            $rootScope.SuratMasuk = item;
         }
 
         $scope.SetSelectedItem = function (item)
@@ -369,36 +371,72 @@
 
     })
 
-    .controller("AddSuratMasukController", function ($scope,SuratMasukService) {
+    .controller("AddSuratMasukController", function ($scope, SuratMasukService,$rootScope) {
+
+        $scope.Init = function ()
+        {
+            $scope.model = $rootScope.SuratMasuk;
+        }
+
         $scope.AddNewItem = function(model)
         {
-            var result = SuratMasukService.Insert(model);
-            if (result == true)
+            if (model.SuratMasukId != undefined && model.SuratMasukId >0)
             {
-                model = {};
+                var result = SuratMasukService.Update(model);
+                if (result == true) {
+                    $scope.model = {};
+                    alert("Data tersimpan");
+                }
+            } else
+            {
+             
+                var result = SuratMasukService.Insert(model);
+                if (result == true) {
+                    $scope.model = {};
+                    alert("Data tersimpan");
+                }
             }
+           
         }
-
 
     })
 
-    .controller("AddSuratKeluarController", function ($scope, SuratKeluarService) {
+    .controller("AddSuratKeluarController", function ($scope, SuratKeluarService, $rootScope) {
+
+        $scope.Init = function ()
+        {
+            $scope.model = $rootScope.SuratKeluar;
+        }
         $scope.AddNewItem = function (model) {
-            var result = SuratKeluarService.Insert(model);
-            if (result == true) {
-                model = {};
+            if (model.SuratMasukId != undefined && model.SuratMasukId > 0) {
+                var result = SuratKeluarService.Update(model);
+                if (result == true) {
+                    $scope.model = {};
+                    alert("Data tersimpan");
+                }
+            } else {
+                model.TanggalKeluar = new Date();
+                var result = SuratKeluarService.Insert(model);
+                if (result == true) {
+                    $scope.model = {};
+                    alert("Data tersimpan");
+                }
             }
         }
+
+       
 
 
 
     })
 
-    .controller("SuratKeluarController", function ($scope, SuratKeluarService) {
+    .controller("SuratKeluarController", function ($scope, SuratKeluarService, $rootScope) {
         SuratKeluarService.Get().then(function (data) {
             $scope.SuratKeluar = data;
         });
-
+        $scope.EditSurat = function (item) {
+            $rootScope.SuratKeluar = item;
+        }
         $scope.SetSelectedItem = function (item) {
             $scope.SelectedItem = item;
             $scope.model = item.Disposisi;

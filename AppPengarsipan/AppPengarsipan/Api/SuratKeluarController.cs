@@ -107,8 +107,8 @@ namespace AppPengarsipan.Api
                 {
                     if (ModelState.IsValid)
                     {
-                        value.SuratMasukId = db.SuratKeluar.InsertAndGetLastID(value);
-                        if (value.SuratMasukId > 0)
+                        var updated = db.SuratKeluar.Update(O => new {O.KodeSurat,O.Lampiran,O.NomorSurat,O.Perihal,O.TanggalKeluar,O.TanggalSurat,O.Tujuan,O.UserId }, value, O => O.SuratMasukId == value.SuratMasukId);
+                        if (updated)
                             return Request.CreateResponse(HttpStatusCode.OK, value);
                         else
                             throw new SystemException("Data Tidak Tersimpan");

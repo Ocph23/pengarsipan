@@ -16,18 +16,23 @@
 
 </head>
 <body ng-app="app">
+
     <div class="wrapper">
+
         <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
             <!--
                 Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
                 Tip 2: you can also add an image using data-image tag
             -->
+         
+          
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
                     Pengarsipan Surat
                 </a>
             </div>
+        
             <div class="sidebar-wrapper">
                 <ul class="nav nav-pills nav-pills-rose nav-stacked">
                     <li class="active">
@@ -65,35 +70,26 @@
                             
                         </ul>
                     </li>
-                    <li class="active">
-                        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                    <li class="active-pro">
+                        <center>
+                            @Html.Partial("_LoginPartial")
+                        </center>
+                 
                     </li>
-                  
+                
                 </ul>
+              
             </div>
+           
         </div>
+      
         <div class="main-panel">
-            <div class="col-lg-12">
-                <nav class="navbar navbar-transparent navbar-absolute">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        
-                    </div>
-                </nav>
-            </div>
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-content">
                         <div class="col-md-12">
                             <div class="col-md-2">
-                                <img style="width:200px" height="250px" src="../assets/img/pemerintah provinsi file png.png" />
+                                <img style="width:200px" src="../assets/img/pemerintah provinsi file png.png" />
                             </div>
                             <div class="col-md-10">
                                 <h2>SEKRETARIAT DAERAH  PROVINSI  PAPUA</h2>
@@ -103,10 +99,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            
+           
             <div class="content">
+               
                 <div class="container-fluid">
                     @RenderBody()
                 </div>
@@ -119,7 +115,6 @@
                         <script>
                             document.write(new Date().getFullYear())
                         </script>
-                        <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                     </p>
                 </div>
             </footer>
